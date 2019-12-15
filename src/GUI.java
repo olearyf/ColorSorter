@@ -9,7 +9,7 @@ public class GUI {
     public static JFrame frame;
     public static JPanel top, bottom, title;
     public static ColorGrid cg;
-    public static JPanel[][] main;
+    public static JPanel[] main;
     public static Border blackline;
 
     public static void main(String[] args){
@@ -18,7 +18,7 @@ public class GUI {
         frame.setSize(600,600);
         frame.setResizable(false);
 
-        GridLayout grid = new GridLayout(20,20);
+        GridLayout grid = new GridLayout(1,20);
         JPanel bigMain = new JPanel();
         BoxLayout total = new BoxLayout(bigMain, BoxLayout.Y_AXIS);
 
@@ -31,20 +31,20 @@ public class GUI {
         //frame.setLayout(grid);
         JPanel top = new JPanel();
         top.setLayout(grid);
-        JPanel[][] main = new JPanel[20][20];
+        JPanel[] main = new JPanel[20];
         //later change it to be manipulated by the user
         ColorGrid cg = new ColorGrid();
-        JLabel[][] labelArray = new JLabel[20][20];
+        //JLabel[][] labelArray = new JLabel[20][20];
         for(int i = 0; i < 20; i++){
-            for(int j = 0; j < 20; j++){
-                main[i][j] = new JPanel();
-                labelArray[i][j] = new JLabel("");
-                labelArray[i][j].setBackground(cg.getColorArray()[i][j]);
+            //for(int j = 0; j < 20; j++){
+                main[i] = new JPanel();
+                //labelArray[i][j] = new JLabel("");
+                //labelArray[i][j].setBackground(cg.getColorArray()[i][j]);
                 //main[i][j].add(labelArray[i][j]);
-                main[i][j].setBackground(cg.getColorArray()[i][j]);
-                main[i][j].setBorder(blackline);
-                top.add(main[i][j]);
-            }
+                main[i].setBackground(cg.getColorArray()[i]);
+                main[i].setBorder(blackline);
+                top.add(main[i]);
+            //}
         }
         JPanel bottom = new JPanel();
         JButton sort = new JButton("Sort");
@@ -67,15 +67,15 @@ public class GUI {
                 cg.refresh();
                 top.removeAll();
                 for(int i = 0; i < 20; i++){
-                    for(int j = 0; j < 20; j++){
-                        main[i][j] = new JPanel();
-                        labelArray[i][j] = new JLabel("");
-                        labelArray[i][j].setBackground(cg.getColorArray()[i][j]);
+                    //for(int j = 0; j < 20; j++){
+                        main[i] = new JPanel();
+                        //labelArray[i][j] = new JLabel("");
+                        //labelArray[i][j].setBackground(cg.getColorArray()[i][j]);
                         //main[i][j].add(labelArray[i][j]);
-                        main[i][j].setBackground(cg.getColorArray()[i][j]);
-                        main[i][j].setBorder(blackline);
-                        top.add(main[i][j]);
-                    }
+                        main[i].setBackground(cg.getColorArray()[i]);
+                        main[i].setBorder(blackline);
+                        top.add(main[i]);
+                    //}
                 }
                 top.updateUI();
             }
@@ -86,29 +86,29 @@ public class GUI {
                 String choice = (String)options.getSelectedItem();
                 switch(choice){
                     case"Bubble Sort":
-                        for(int i = 0; i < 20; i++){
-                            for(int j = 0; j < 19; j++){
-                                if(cg.compareRGB(cg.getColorArray()[i][j], cg.getColorArray()[i][j+1])){
-                                    Color temp = cg.getColorArray()[i][j];
-                                    cg.getColorArray()[i][j] = cg.getColorArray()[i][j+1];
-                                    cg.getColorArray()[i][j+1] = temp;
-                                    top.removeAll();
-                                    for(int n = 0; n < 20; n++){
-                                        for(int k = 0; k < 20; k++){
-                                            main[n][k] = new JPanel();
-                                            labelArray[n][k] = new JLabel("");
-                                            labelArray[n][k].setBackground(cg.getColorArray()[n][k]);
-                                            //main[i][j].add(labelArray[i][j]);
-                                            main[n][k].setBackground(cg.getColorArray()[i][k]);
-                                            main[n][k].setBorder(blackline);
-                                            top.add(main[i][k]);
-                                        }
-                                    }
-                                    top.updateUI();
-                                    frame.pack();
-                                }
+                        for(int i = 0; i < 19; i++){
+                            //for(int j = 0; j < 19; j++){
+                                if(cg.compareRGB(cg.getColorArray()[i], cg.getColorArray()[i+1])){
+                                    Color temp = cg.getColorArray()[i];
+                                    cg.getColorArray()[i] = cg.getColorArray()[i+1];
+                                    cg.getColorArray()[i+1] = temp;
+                                //}
                             }
                         }
+                        top.removeAll();
+                        for(int n = 0; n < 20; n++){
+                            //for(int k = 0; k < 20; k++){
+                            main[n] = new JPanel();
+                            //labelArray[n][k] = new JLabel("");
+                            //labelArray[n][k].setBackground(cg.getColorArray()[n][k]);
+                            //main[i][j].add(labelArray[i][j]);
+                            main[n].setBackground(cg.getColorArray()[n]);
+                            main[n].setBorder(blackline);
+                            top.add(main[n]);
+                            //}
+                        }
+                        top.updateUI();
+                        frame.pack();
                     case"Selection Sort":
                     case"Insertion Sort":
                     case"Quick Sort":
@@ -122,15 +122,15 @@ public class GUI {
     public static void updateGUI(Color[][] colors){
         top.removeAll();
         for(int i = 0; i < 20; i++){
-            for(int j = 0; j < 20; j++){
-                main[i][j] = new JPanel();
+            //for(int j = 0; j < 20; j++){
+                main[i] = new JPanel();
                 //labelArray[i][j] = new JLabel("");
                 //labelArray[i][j].setBackground(cg.getColorArray()[i][j]);
                 //main[i][j].add(labelArray[i][j]);
-                main[i][j].setBackground(colors[i][j]);
-                main[i][j].setBorder(blackline);
-                top.add(main[i][j]);
-            }
+                main[i].setBackground(colors[i][0]);
+                main[i].setBorder(blackline);
+                top.add(main[i]);
+            //}
         }
         top.updateUI();
     }

@@ -3,27 +3,31 @@ import java.util.Random;
 
 public class ColorGrid {
 
-    private Color[][] colorArray;
+    private Color[] colorArray;
     private int r, g, b;
     private Random random = new Random();
 
     public ColorGrid(){
-        colorArray = new Color[20][20];
+        colorArray = new Color[20];
         refresh();
     }
 
-    public Color[][] getColorArray(){
+    public Color[] getColorArray(){
         return colorArray;
     }
 
     public void refresh(){
         for(int i = 0; i < 20; i++){
-            for(int j = 0; j < 20; j++){
+            //for(int j = 0; j < 20; j++){
                 r = random.nextInt(255);
-                g = random.nextInt(255);
-                b = random.nextInt(255);
-                colorArray[i][j] = new Color(r, g, b);
-            }
+                //g = random.nextInt(255);
+            //r = 100;
+            //g = 200;
+            g = r;
+            b = r;
+                //b = random.nextInt(255);
+                colorArray[i] = new Color(r, g, b);
+            //}
         }
     }
 
@@ -35,7 +39,7 @@ public class ColorGrid {
         }
     }
 
-    public void BubbleSort(){
+    /*public void BubbleSort(){
         Thread time = new Thread();
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 19; j++){
@@ -47,5 +51,5 @@ public class ColorGrid {
                 }
             }
         }
-    }
+    }*/
 }
